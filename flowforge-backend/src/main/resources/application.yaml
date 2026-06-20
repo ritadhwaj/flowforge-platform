@@ -4,9 +4,17 @@ server:
 spring:
   application:
     name: flowforge-backend
+  config:
+    import: "optional:file:.env[.properties]"
   mongodb:
-    uri: mongodb+srv://06ritadhwaj29_db_user:FHl4HLkyWcHKo0GG@flowforge-mongodb-clust.thmx8ml.mongodb.net/flowforge
     database: flowforge
+
+app:
+  mongodb:
+    uri-template: "mongodb+srv://{username}:{password}@flowforge-mongodb-clust.thmx8ml.mongodb.net/flowforge"
+    encrypted-username: "X5CSqtoLJxJMZxIqCyXQ1bydvqxoFXWMFwKGEAVl0dbRJ2IVfSNcFgRunNDFbhiruA=="
+    encrypted-password: "UHngArFexRnHrDqV/qiP1MxB9EvFkK6Qqldxvw8CQpRE/tZItFxWZESTYj0="
+    encryption-key: ${MONGO_ENCRYPTION_KEY}
 
 jobrunr:
   background-job-server:
