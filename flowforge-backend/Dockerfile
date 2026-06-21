@@ -1,8 +1,11 @@
-FROM eclipse-temurin:25-jdk AS build
+# ---- Build Stage ----
+FROM maven:3.9-eclipse-temurin-25 AS build
 WORKDIR /app
-COPY . .
-RUN ./mvnw clean package -DskipTests || mvn clean package -DskipTests
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
+# ---- Run Stage ----
 FROM eclipse-temurin:25-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
